@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	{{ if meetingCallStatus == true }}
+	<script>
+		alert('成功，已经进入发送邮件队列')
+		window.location.href = '/meeting'
+	</script>
+	{{ /if }}
+
+	{{ if meetingCallStatus == false }}
+	<script>
+		alert('{{ err }}')
+		history.back()
+	</script>
+	{{ /if }}
+</body>
+</html>

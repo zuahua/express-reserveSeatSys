@@ -1,0 +1,45 @@
+<div class="container">
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs col-lg-6" role="tablist">
+		<li role="presentation" class="active"><a href="#userinfo" aria-controls="userinfo" role="tab"
+				data-toggle="tab">个人信息</a></li>
+		<li role="presentation"><a href="#safeManage" aria-controls="safeManage" role="tab" data-toggle="tab">安全管理</a>
+		</li>
+	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content col-lg-12">
+		<br />
+		<div role="tabpanel" class="tab-pane active" id="userinfo">
+			<form class="form-inline" action="/userinfo-changeusername" method="POST">
+				<div class="form-group">
+					<label for="usernameModify">用户名：</label>
+					<input type="text" class="form-control" id="usernameModify" name="usernameModify" value="{{ username }}" disabled>
+				</div>
+				<a href="#" id="aTagModify">修改<span class="glyphicon glyphicon-pencil"></span></a>
+				<a href="#" id="aTagCancleModify" style="display: none">撤销</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<button id="confirmModifyBtn" type="submit" class="btn btn-success" disabled="disabled">确认修改</button>
+			</form>
+		</div>
+
+		<div role="tabpanel" class="tab-pane" id="safeManage">
+			<h3 class="text-center">密码修改</h3>
+			<form class="form" action="/userinfo-changepassword" method="POST">
+				<div class="form-group">
+					<label for="oldPassword">原密码：</label>
+					<input type="password" class="form-control" id="oldPassword" name="oldPassword">
+				</div>
+				<div class="form-group">
+					<label for="newPassword">新密码：</label>
+					<input type="password" class="form-control" id="newPassword" name="newPassword">
+				</div>
+				<div class="form-group">
+					<label for="reNewPassword">确认密码：</label>
+					<input type="password" class="form-control" id="reNewPassword" name="reNewPassword">
+				</div>
+				<p class="text-center"><button type="submit" class="btn btn-success">确认修改</button></p>
+			</form>
+		</div>
+	</div>
+</div>

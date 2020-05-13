@@ -1,0 +1,28 @@
+<!-- 页面 登录、注册忘记密码 -->
+{{ extend './layout.html' }}
+
+<!-- link -->
+{{ block 'head' }}
+	<!-- 自定义样式 -->
+	<link href="/public/stylesheets/index.css" rel="stylesheet">
+{{ /block }}
+
+<!-- header -->
+{{ block 'header' }}
+	{{ include './header.html'}}
+{{ /block }}
+
+<!-- content -->
+{{ block 'content' }}
+	{{ include './login-register-main.html' }}
+{{ /block }}
+
+<!-- footer -->
+{{ block 'footer' }}
+	{{ include './footer-login-register.html'}}
+{{ /block }}
+
+{{ block 'script' }}
+	<!-- 切换 登录 注册 忘记密码 组件 JS -->
+	<script src="/public/javascripts/toggle.js"></script>
+{{ /block }}

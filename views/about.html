@@ -1,0 +1,97 @@
+<!-- 页面 登录、注册忘记密码 -->
+{{ extend './layout.html' }}
+
+<!-- link -->
+{{ block 'head' }}
+<!-- 自定义样式 -->
+<style>
+	div.alert {
+		font-size: 17px;
+	}
+</style>
+{{ /block }}
+
+<!-- header -->
+{{ block 'header' }}
+{{ include './header.html'}}
+{{ /block }}
+
+<!-- content -->
+{{ block 'content' }}
+<div class="container">
+	<div class="alert alert-success">
+		<ul>
+			<li>基于 Express Node.js 框架</li>
+		</ul>
+	</div>
+
+	<div class="alert alert-info">
+		<ul>
+			<li>使用 bootstrap 3 CSS UI 插件</li>
+		</ul>
+	</div>
+
+	<div class="alert alert-warning">
+		<ul>
+			<li>使用 jQuery 1.12.1</li>
+		</ul>
+	</div>
+
+	<div class="alert alert-danger">
+		<ul>
+			<li>使用 art-template 模板引擎</li>
+		</ul>
+	</div>
+
+	<div class="alert alert-info">
+		<ul>
+			<li>使用 MySql 数据库</li>
+		</ul>
+	</div>
+
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+		点我查看系统功能
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">系统功能</h4>
+				</div>
+				<div class="modal-body" style="font-size: 16px">
+					登录 <br>
+					注册 <br>
+					重置密码 <br>
+					用户名修改 <br>
+					用户密码修改 <br>
+					占座 <br>
+					离开座位 <br>
+					当前用户占座信息 <br>
+					发布开会通知邮件 <br>
+					用户授权 <br>
+					...
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br/><br/><br/>
+	<p class="text-right" style="font-size: 14px">完成于 2020-05-13 日 By <a href="mailto:#">innozh@163.com</a></p>
+</div>
+{{ /block }}
+
+<!-- footer -->
+{{ block 'footer' }}
+{{ include './footer-login-register.html'}}
+{{ /block }}
+
+{{ block 'script' }}
+
+{{ /block }}

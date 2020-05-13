@@ -1,0 +1,117 @@
+<!-- 登录、注册、忘记密码 模板 -->
+<div class="container">
+	<form action="/login" method="post" id="loginForm" style="display: none">
+		<h4 class="text-center">用户登录</h4>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="usernameLogin" class="input-group-addon"><span
+					class="glyphicon glyphicon-user"></span></label>
+			<input type="text" class="form-control" id="usernameLogin" name="usernameLogin" placeholder="用户名/邮箱">
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="passwdLogin" class="input-group-addon"><span
+					class="glyphicon glyphicon-lock"></span></label>
+			<input type="password" class="form-control" id="passwdLogin" name="passwdLogin" placeholder="密码">
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="validateLogin" class="input-group-addon"><span
+					class="glyphicon glyphicon-text-background"></span></label>
+			<input type="text" class="form-control" id="validateLogin" name="validateLogin" placeholder="验证码">
+			<span class="input-group-addon">
+				<img src="/captcha?status=login" alt="验证码" class="validateCode">
+			</span>
+		</div>
+		<div class="checkbox input-group col-md-2 col-md-offset-3">
+			<label>
+				<input type="checkbox" id="rememberMeLogin" name="rememberMeLogin" value="记住我"> 记住我
+			</label>
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3 col-xs-12">
+			<p class="text-left" style="position:absolute;"><a href="/login-register?status=forget">忘记密码?</a>
+			</p>
+			<button type="submit" class="btn btn-primary col-md-2 col-md-offset-5 col-xs-offset-5"
+				id="login">登录</button>
+			<p class="text-right" style="float: right;"><a href="/login-register?status=register">没有账号?注册</a>
+			</p>
+		</div>
+	</form>
+
+	<form action="/register" method="post" id="registerForm" style="display: none;">
+		<h4 class="text-center">用户注册</h4>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="usernameRe" class="input-group-addon"><span
+					class="glyphicon glyphicon-user"></span></label>
+			<input type="text" class="form-control" id="usernameRe" name="usernameRe" placeholder="用户名">
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="emailRe" class="input-group-addon"><span
+					class="glyphicon glyphicon-envelope"></span></label>
+			<input type="mail" class="form-control" id="emailRe" name="emailRe" placeholder="邮箱">
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="passwdRe" class="input-group-addon"><span
+					class="glyphicon glyphicon-lock"></span></label>
+			<input type="password" class="form-control" id="passwdRe" name="passwdRe" placeholder="密码">
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="rePasswdRe" class="input-group-addon"><span
+					class="glyphicon glyphicon-lock"></span></label>
+			<input type="password" class="form-control" id="rePasswdRe" name="rePasswdRe" placeholder="确认密码">
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="validateRe" class="input-group-addon"><span
+					class="glyphicon glyphicon-text-background"></span></label>
+			<input type="text" class="form-control" id="validateRe" name="validateRe" placeholder="验证码">
+			<span class="input-group-addon">
+				<img src="/captcha?status=register" alt="验证码" class="validateCode">
+			</span>
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3 col-xs-12" style="margin-top: 1em;">
+			<button type="submit" class="btn btn-primary col-md-2 col-md-offset-5 col-xs-offset-5"
+				id="register">注册</button>
+			<p class="text-right" style="float: right;"><a href="/login-register?status=login">已有账号?登录</a></p>
+		</div>
+	</form>
+
+	<form action="/forget" method="post" id="forgetForm" style="display: none;">
+		<h4 class="text-center">忘记密码</h4>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="emailForget" class="input-group-addon"><span
+					class="glyphicon glyphicon-envelope"></span></label>
+			<input type="mail" class="form-control" id="emailForget" name="emailForget" placeholder="邮箱">
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="passwdForget" class="input-group-addon"><span
+					class="glyphicon glyphicon-lock"></span></label>
+			<input type="password" class="form-control" id="passwdForget" name="passwdForget" placeholder="新密码">
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="rePasswdForget" class="input-group-addon"><span
+					class="glyphicon glyphicon-lock"></span></label>
+			<input type="password" class="form-control" id="rePasswdForget" name="rePasswdForget" placeholder="确认密码">
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="validateForget" class="input-group-addon"><span
+					class="glyphicon glyphicon-text-background"></span></label>
+			<input type="text" class="form-control" id="validateForget" name="validateForget" placeholder="验证码">
+			<span class="input-group-addon">
+				<img src="/captcha?status=forget" alt="验证码" class="validateCode">
+			</span>
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3">
+			<label for="validateMailForget" class="input-group-addon"><span
+					class="glyphicon glyphicon-header"></span></label>
+			<input type="text" class="form-control" id="validateMailForget" name="validateMailForget" placeholder="邮箱验证码">
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-success" id="sendMailForget">发送邮件</button>
+			</span>
+		</div>
+		<div class="input-group col-md-6 col-md-offset-3 col-xs-12" style="margin-top: 1em">
+			<p class="text-left" style="position:absolute;"><a href="/login-register?status=login">已有账号?登录</a>
+			</p>
+			<button type="submit" class="btn btn-primary col-md-2 col-md-offset-5 col-xs-offset-5"
+				id="forgetPasswdSubmit">提交</button>
+			<p class="text-right" style="float: right;"><a href="/login-register?status=register">没有账号?注册</a>
+			</p>
+		</div>
+	</form>
+</div>

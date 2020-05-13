@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{ status }}结果</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<!-- result: success,error status: 登录，注册，重置密码 error -->
+	<div class="container">
+		{{ if result == 'success' }}
+		<div class="alert alert-info" role="alert">
+			<h4>恭喜你！！！{{ status }}成功! []~(￣▽￣)~*</h4>
+
+			{{ if status == '注册' }}
+			<p call="text-right">
+				<span id="successRedirect"></span>
+				s后自动跳转...
+				<a href="/login-register?status=login" style="color:blueviolet"><i>点击跳转</i></a>
+			</p>
+			<p style="color:red;">请注意查看邮箱激活账号，若未收到邮件，请查看垃圾箱或联系管理员</p>
+			<script>
+				// 10s后重定向
+				setTimeout(function () {
+					window.location.href = '/login-register?status=login'
+				}, 10000);
+				let n = 10
+				setInterval(function () {
+					$('#successRedirect').html(n);
+					n = n - 1
+				}, 1000)
+			</script>
+			{{ /if }}
+
+			{{ if status == '登录' }}
+			<p call="text-right">
+				<span id="successRedirect"></span>
+				s后自动跳转... 
+				<a href="/" style="color:blueviolet"><i>点击跳转</i></a>
+			</p>
+			<script>
+				// 3s后重定向
+				setTimeout(function () {
+					window.location.href = '/'
+				}, 3000);
+				let n = 3
+				setInterval(function () {
+					$('#successRedirect').html(n);
+					n = n - 1
+				}, 1000)
+			</script>
+			{{ /if }}
+
+			{{ if status == '重置密码' }}
+			<!-- 重置密码结果渲染 -->
+			<p call="text-right">
+				<span id="successRedirect"></span>
+				s后自动跳转...
+				<a href="/login-register?status=login" style="color:blueviolet"><i>点击跳转</i></a>
+			</p>
+			<script>
+				// 3s后重定向
+				setTimeout(function () {
+					window.location.href = '/login-register?status=login'
+				}, 3000);
+				let n = 3
+				setInterval(function () {
+					$('#successRedirect').html(n);
+					n = n - 1
+				}, 1000)
+			</script>
+			{{ /if }}
+		</div>
+		{{ /if }}
+
+		{{ if result == 'error' }}
+		<input id="errorInfo" type="text" value="{{ error }}" hidden>
+		<input id="errorStatus" type="text" value="{{ status }}" hidden>
+		<script>
+			let errorInfo = $('#errorInfo').val()
+			let errorStatus = $('#errorStatus').val()
+			// console.log(errorStatus)
+			alert(errorInfo)
+			if (errorStatus === '登录') {
+				history.back()
+			} else if (errorStatus === '注册') {
+				console.log('ok')
+				history.back()
+			} else if (errorStatus === '重置密码') {
+				history.back()
+			}
+		</script>
+		{{ /if }}
+	</div>
+</body>
+
+</html>

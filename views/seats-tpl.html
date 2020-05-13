@@ -1,0 +1,106 @@
+<div class="container">
+	<!-- 未登录 -->
+	{{ if status == 'noLogin' }}
+	<div class="alert alert-danger" role="alert">
+		<p class="text-center">对不起，你未登录，请先去登录！😐</p>
+	</div>
+	{{ /if }}
+
+	<!-- 已登录 -->
+	{{ if status == 'hasLogin' }}
+	<button type="button" class="btn btn-primary door" disabled="disabled">门</button>
+
+	<div class="container">
+		<!-- 桌子前的 5 个座位 -->
+		<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 top-btn-box">
+			<p class="text-center">
+				<!-- seats 数组 索引$index为座位号-1 $value为对象 {status: true or false, username: ''} -->
+				{{each seats}}
+					<!-- 显示前5个座位信息 -->
+					{{ if $index < 5 }}
+						<!-- 已占座 -->
+						{{ if $value.status == true }}
+						<button name="seat" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="{{ $value.username }} 已占座" seatNumber="{{ $index + 1 }}">{{ $index + 1 }}</button>
+						{{ /if }}
+
+						<!-- 未占座 -->
+						{{ if $value.status == false }}
+							<button name="seat" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="未占座" seatNumber="{{ $index + 1 }}">{{ $index + 1 }}</button>
+						{{ /if }}
+
+					{{ /if }}
+				{{/each}}
+
+			</p>
+		</div>
+
+		<!-- 桌子 -->
+		<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2 desk">
+			<br /><br /><br />
+			<br /><br /><br />
+		</div>
+
+		<!-- 桌子右边座位 1 个 -->
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-1 desk-right">
+			{{each seats}}
+					<!-- 显示 5号 座位信息 -->
+					{{ if $index == 5 }}
+						<!-- 已占座 -->
+						{{ if $value.status == true }}
+						<button name="seat" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="{{ $value.username }} 已占座" seatNumber="{{ $index + 1 }}">{{ $index + 1 }}</button>
+						{{ /if }}
+
+						<!-- 未占座 -->
+						{{ if $value.status == false }}
+							<button name="seat" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="未占座" seatNumber="{{ $index + 1 }}">{{ $index + 1 }}</button>
+						{{ /if }}
+
+					{{ /if }}
+				{{/each}}
+		</div>
+
+		<!-- 桌子后边 5 个座位 -->
+		<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12 top-btn-box">
+			<p class="text-center">
+				<!-- seats 数组 索引$index为座位号-1 $value为对象 {status: true or false, username: ''} -->
+				{{each seats}}
+					<!-- 显示  7-11号 座位信息 -->
+					{{ if $index > 5 && $index < 11}}
+						<!-- 已占座 -->
+						{{ if $value.status == true }}
+						<button name="seat" type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="{{ $value.username }} 已占座" seatNumber="{{ $index + 1 }}">{{ $index + 1 }}</button>
+						{{ /if }}
+
+						<!-- 未占座 -->
+						{{ if $value.status == false }}
+							<button name="seat" type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="未占座" seatNumber="{{ $index + 1 }}">{{ $index + 1 }}</button>
+						{{ /if }}
+
+					{{ /if }}
+				{{/each}}
+
+			</p>
+		</div>
+	</div>
+
+	<div>
+		<!-- 刷新页面 -->
+		<a type="button" class="btn btn-primary" href="/reserveseat">刷新页面</a>
+		<!-- 离开座位 -->
+		<button type="button" class="btn btn-warning" id="leaveSeat">离开座位</button>
+		<!-- 当前用户占座状态 -->
+		<p><h4>你的占座状态：<i style="color: red" id="localUserSeatStatus"></i></h4></p>
+
+		<div class="alert alert-warning">
+			<h4>占座说明：</h4>
+			点击<b>绿色数字按钮</b>进行占座，<b>红色数字按钮</b>表示已被占座
+		</div>
+	</div>
+	{{ /if }}
+
+	<script src="/public/javascripts/seatDOM.js"></script>
+	<script>
+		// tooltip
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	</script>
+</div>

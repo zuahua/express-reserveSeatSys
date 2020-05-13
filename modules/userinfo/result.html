@@ -1,0 +1,54 @@
+<!-- 修改用户信息结果渲染 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>用户信息修改</title>
+</head>
+
+<body>
+	<!-- pageStatus：'usernameChange'；changeResult：'success'、'defeat'；err：err -->
+	{{ if pageStatus == 'usernameChange' }}
+	<!-- 修改用户名结果 -->
+	{{ if changeResult == 'success' }}
+	<script>
+		alert('修改成功')
+		// 跳转到主页
+		window.location.href = '/'
+	</script>
+	{{ /if }}
+
+	{{ if changeResult == 'defeat' }}
+	<script>
+		// 打印失败信息
+		alert('{{ err }}')
+		history.back() // 回到上一页
+	</script>
+	{{ /if }}
+
+	{{ /if }}
+
+	{{ if pageStatus == 'passwordChange' }}
+	<!-- 修改密码结果 -->
+	{{ if changeResult == 'success' }}
+	<script>
+		alert('修改成功')
+		// 跳转到主页
+		window.location.href = '/'
+	</script>
+	{{ /if }}
+
+	{{ if changeResult == 'defeat' }}
+	<script>
+		// 打印失败信息
+		alert('{{ err }}')
+		history.back() // 回到上一页
+	</script>
+	{{ /if }}
+
+	{{ /if }}
+</body>
+
+</html>

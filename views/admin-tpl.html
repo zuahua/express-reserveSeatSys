@@ -1,0 +1,56 @@
+<!-- 授权页面 主体内容 -->
+
+<div class="container">
+	{{ if status == 'noLogin' }}
+	<!-- 未登录 -->
+	<div class="alert alert-danger" role="alert">
+		<p class="text-center">对不起，你未登录，请先去登录！😐</p>
+	</div>
+	{{ /if }}
+
+	{{ if status == "hasLogin" }}
+	<!-- 已登录 -->
+
+	{{ if admin == 0 || admin == 1 }}
+	<!-- 没有权限操作 -->
+	<div class="alert alert-danger" role="alert">
+		<p class="text-center">对不起，没有权限操作此界面！😐</p>
+	</div>
+	{{ /if }}
+
+	{{ if admin == 2 }}
+	<!-- 有权限操作 -->
+	<table class="table table-hover table-bordered text-center">
+		<thead>
+			<tr>
+				<td>序号</td>
+				<td>用户名</td>
+				<td>邮箱</td>
+				<td>权限</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody>
+
+			{{ each userInfoList }}
+			<!-- 遍历数据列表 -->
+			<tr>
+				<td name="index">{{ $index + 1 }}</td>
+				<td name="username">{{ $value.username }}</td>
+				<td name="mail">{{ $value.mail }}</td>
+				<td name="admin">{{ $value.admin }}</td>
+				<td>
+					<button type="button" class="btn btn-success btn-xs" name="getAdmin">授权</button>
+					<button type="button" class="btn btn-warning btn-xs" name="cancelAdmin">取消权限</button>
+				</td>
+			</tr>
+			{{ /each }}
+
+		</tbody>
+	</table>
+	<!-- 引入 操作 的JS -->
+	<script src="/public/javascripts/adminDOM.js"></script>
+	{{ /if }}
+
+	{{ /if }}
+</div>

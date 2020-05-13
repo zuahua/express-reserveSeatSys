@@ -1,0 +1,32 @@
+.validateCode:hover {
+    cursor: pointer;
+}
+
+/* 占座页面 */
+/* 桌子 */
+.desk {
+    background-color: #fff2df;
+    border: 1px solid #fff;
+    box-shadow: 0 0 5px #ffb61e;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 19px;
+}
+
+.door {
+	width: 5em;
+}
+
+.top-btn-box button {
+	margin: 5px 20px;
+	width: 3em;
+}
+.desk-right {
+    margin-top: 55px;
+}
+
+@media (max-width: 768px) {
+    .top-btn-box button {
+        margin: 5px 2px;
+    }
+}

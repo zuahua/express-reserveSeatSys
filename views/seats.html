@@ -1,0 +1,22 @@
+{{ extend './layout.html' }}
+
+<!-- link -->
+{{ block 'head' }}
+	<!-- 自定义样式 -->
+	<link href="/public/stylesheets/index.css" rel="stylesheet">
+{{ /block }}
+
+<!-- 头部 -->
+{{ block 'header' }}
+  {{ include './header.html' }}
+{{ /block }}
+
+<!-- 内容主题 -->
+{{ block 'content' }}
+  {{ include './seats-tpl.html' }}
+{{ /block }}
+
+<!-- 底部 -->
+{{ block 'footer' }}
+  {{ include './footer-index.html' }}
+{{ /block }}

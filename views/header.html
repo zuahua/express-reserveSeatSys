@@ -1,0 +1,60 @@
+<div class="container">
+	<div class="header clearfix">
+		<div class="navbar-header navbar-default">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+				data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<h3 class="text-muted">410占座系统</h3>
+		</div>
+		<nav class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav nav-pills pull-right" id="headerNav">
+				<li role="presentation" class="active" id="mainPageLi"><a href="/">主页</a></li>
+				<li role="presentation" id="reserveSeatLi"><a href="/reserveseat">占座</a></li>
+
+				{{ if admin == 2 }}
+				<li role="presentation" id="getAdmin"><a href="/getadmin">授权</a></li>
+				{{ /if }}
+
+				<li role="presentation" id="meetingLi"><a href="/meeting">开会</a></li>
+				<li role="presentation" id="aboutLi"><a href="/about">关于</a></li>
+				{{ if status == 'noLogin' }}
+				<li role="presentation" id="loginLi">
+					<a href="/login-register?status=login">
+						<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+						登录
+					</a>
+				</li>
+				<li role="presentation" id="registerLi">
+					<a href="/login-register?status=register">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						注册
+					</a>
+				</li>
+				{{ /if }}
+				{{ if status == 'hasLogin' }}
+				<li role="presentation" class="dropdown">
+					<a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">
+						{{ username }}
+						<span class="caret"></span>
+						<ul class="dropdown-menu" aria-labelledby="dLabel">
+							<li>
+								<a href="/userinfo">用户信息</a>
+							</li>
+						</ul>
+					</a>
+				</li>
+				<li role="presentation">
+					<a href="/logout">
+						注销
+					</a>
+				</li>
+				{{ /if }}
+			</ul>
+		</nav>
+	</div>
+</div>

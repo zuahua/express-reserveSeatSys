@@ -1,0 +1,34 @@
+<div class="container">
+	<!-- 未登录 -->
+	{{ if status == 'noLogin' }}
+	<div class="alert alert-danger" role="alert">
+		<p class="text-center">对不起，你未登录，请先去登录！😐</p>
+	</div>
+	{{ /if }}
+
+	<!-- 已登录 -->
+	{{ if status == 'hasLogin' }}
+
+		{{ if admin !== 1 && admin !== 2 }}
+		<div class="alert alert-danger" role="alert">
+			<p class="text-center">对不起，你没有权限发布开会通知😁</p>
+		</div>
+		{{ /if }}
+
+		<!-- 有权限 -->
+		{{ if admin==1 || admin==2 }}
+		<h4>发布开会通知</h4>
+		<form action="/meeting" method="post">
+			<div class="form-group">
+				<label for="meetingCall">发布内容：</label>
+				<textarea name="meetingCall" id="meetingCall" cols="30" rows="4" class="form-control"
+					style="font-size: 18px;"></textarea>
+
+			</div>
+			<button type="submit" class="btn btn-default">发布</button>
+			<div class="alert alert-warning" style="font-size:17px">说明：这将给<b>所有注册用户</b>发送开会通知邮件！！！</div>
+		</form>
+		{{ /if }}
+	{{ /if }}
+
+</div>
