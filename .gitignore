@@ -1,5 +1,4 @@
 modules/const/passwordcopy.js
-modules/const/password.js
 node_modules
 test
 package-lock.json
