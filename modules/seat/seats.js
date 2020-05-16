@@ -56,49 +56,53 @@ function getSeatsInfo(callback) {
  * @param {*} callback 回调 (err, result) => {} err: err; result: 'success' or 'defeat'
  */
 function reverseSeat(seatNumber, mail, callback) {
-	if (seatNumber <= 0) {
-		return callback('座位号错误', 'defeat')
-	} else if (mail === undefined) {
-		return callback('session中没有此邮箱信息', 'defeat')
-	} else {
-		// 查询此座位是否被占
-		let queryStr = `SELECT username,mail FROM users WHERE seatNumber=${seatNumber}`
-		getConnectionQuery(pool, queryStr, (err, results) => {
-			if (err) {
-				return callback(err, 'defeat')
-			} else {
-				if (results.length !== 0) { // 已被占
-					return callback('此座位不可被占座，因为已经被占了😥', 'defeat')
-				} else { // 可以占座
+	try {
+		if (seatNumber <= 0) {
+			return callback('座位号错误', 'defeat')
+		} else if (mail === undefined) {
+			return callback('session中没有此邮箱信息', 'defeat')
+		} else {
+			// 查询此座位是否被占
+			let queryStr = `SELECT username,mail FROM users WHERE seatNumber=${seatNumber}`
+			getConnectionQuery(pool, queryStr, (err, results) => {
+				if (err) {
+					return callback(err, 'defeat')
+				} else {
+					if (results.length !== 0) { // 已被占
+						return callback('此座位不可被占座，因为已经被占了😥', 'defeat')
+					} else { // 可以占座
 
-					// 查询此用户是否已经占座
-					let queryStr1 = `SELECT seatNumber FROM users WHERE mail='${mail}'`
-					getConnectionQuery(pool, queryStr1, (err, results) => {
-						if (err) {
-							return callback(err, 'defeat')
-						} else {
-							if (results[0].seatNumber !== 0) {
-								return callback('你已经占座了，不能重复占座', 'defeat')
+						// 查询此用户是否已经占座
+						let queryStr1 = `SELECT seatNumber FROM users WHERE mail='${mail}'`
+						getConnectionQuery(pool, queryStr1, (err, results) => {
+							if (err) {
+								return callback(err, 'defeat')
 							} else {
-								// 更新记录
-								let queryStr2 = `UPDATE users SET seatNumber=${seatNumber} WHERE mail='${mail}'`
-								getConnectionQuery(pool, queryStr2, (err, results) => {
-									if (err) {
-										return callback(err, 'defeat')
-									} else {
-										if (results.changedRows !== 1) {
-											return callback('没有此邮箱用户信息，占座失败', 'defeat')
+								if (results[0].seatNumber !== 0) {
+									return callback('你已经占座了，不能重复占座', 'defeat')
+								} else {
+									// 更新记录
+									let queryStr2 = `UPDATE users SET seatNumber=${seatNumber} WHERE mail='${mail}'`
+									getConnectionQuery(pool, queryStr2, (err, results) => {
+										if (err) {
+											return callback(err, 'defeat')
 										} else {
-											return callback(null, 'success')
+											if (results.changedRows !== 1) {
+												return callback('没有此邮箱用户信息，占座失败', 'defeat')
+											} else {
+												return callback(null, 'success')
+											}
 										}
-									}
-								})
+									})
+								}
 							}
-						}
-					})
+						})
+					}
 				}
-			}
-		})
+			})
+		}
+	} catch (err) {
+		return callback(err)
 	}
 }
 //#endregion
@@ -122,8 +126,7 @@ function getLocalUserSeatStatus(mail, callback) {
 		} else {
 			if (results[0].seatNumber !== 0) { // 已占座
 				return callback(null, results[0].seatNumber)
-			}
-			else {
+			} else {
 				return callback(null, '未占座')
 			}
 		}
@@ -150,11 +153,9 @@ function leaveSeat(mail, callback) {
 		} else {
 			if (results.changedRows === 0) { // 没有记录被更新
 				return callback('你未占座') // 也有可能表中没有此邮箱记录
-			}
-			else if (results.changedRows === 1) { // 成功更新记录
+			} else if (results.changedRows === 1) { // 成功更新记录
 				return callback(null)
-			}
-			else {
+			} else {
 				return callback('虽然离开座位成功了，但是出现未知错误，请联系管理员')
 			}
 		}

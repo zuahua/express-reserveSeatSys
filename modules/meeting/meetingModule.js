@@ -15,37 +15,37 @@ const sendMail = require('../mail/sendMail') // 发送邮件
  * @param {*} callback 回调 err => {} err: err or null
  */
 function meetingCall(mail, content, callback) {
-	if (mail === undefined) {
-		return callback('没有你的邮箱用户信息')
-	}
-	else if (content === '') {
-		return callback('发布内容为空')
-	}
-	else if (content.length < 6) {
-		return callback('内容不少于6个字')
-	}
-	else {
-		// 查找所有激活账户
-		let queryStr = `SELECT mail FROM users WHERE active_status=1`
-		getConnectionQuery(pool, queryStr, (err, results) => {
-			if (err) {
-				return callback(err)
-			} else {
-				if (results.length === 0) {
-					return callback('没有用户')
+	try {
+		if (mail === undefined) {
+			return callback('没有你的邮箱用户信息')
+		} else if (content === '') {
+			return callback('发布内容为空')
+		} else if (content.length < 6) {
+			return callback('内容不少于6个字')
+		} else {
+			// 查找所有激活账户
+			let queryStr = `SELECT mail FROM users WHERE active_status=1`
+			getConnectionQuery(pool, queryStr, (err, results) => {
+				if (err) {
+					return callback(err)
+				} else {
+					if (results.length === 0) {
+						return callback('没有用户')
+					} else {
+						callback(null)
+						// 发送邮件
+						let subject = '占座系统开会通知'
+						let html = `<h4>${content}</h4>`
+						results.forEach(function (item) {
+							let mail = item.mail
+							sendMail(mail, subject, html)
+						})
+					}
 				}
-				else {
-					callback(null)
-					// 发送邮件
-					let subject = '占座系统开会通知'
-					let html = `<h4>${content}</h4>`
-					results.forEach(function(item) {
-						let mail = item.mail
-						sendMail(mail, subject, html)
-					})
-				}
-			}
-		})
+			})
+		}
+	} catch (err) {
+		return callback(err)
 	}
 }
 //#endregion
@@ -60,8 +60,7 @@ function meetingCall(mail, content, callback) {
 function getUserAdmin(mail, callback) {
 	if (mail === undefined) {
 		return callback('没有你的邮箱用户信息')
-	}
-	else {
+	} else {
 		let queryStr = `SELECT admin FROM users WHERE mail='${mail}'`
 		getConnectionQuery(pool, queryStr, (err, results) => {
 			if (err) {
@@ -69,11 +68,9 @@ function getUserAdmin(mail, callback) {
 			} else {
 				if (results.length === 0) {
 					return callback('没有用户')
-				}
-				else if (results.length === 1) {
+				} else if (results.length === 1) {
 					return callback(null, results[0].admin)
-				}
-				else {
+				} else {
 					return callback('查询到多条用户信息')
 				}
 			}

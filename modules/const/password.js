@@ -1,12 +1,12 @@
 // 存放各类用户名密码
 
 // 邮件地址
-const mailAddress = 'xxxxx@163.com'
+const mailAddress = 'innozh@163.com'
 // 邮件密码
-const mailPassword = 'xxxxxxxxxxxxxxxxx'
+const mailPassword = 'RMYBTWDOMEUQRMFD'
 
 // sql密码
-sqlPassword = 'xxxxxxxxxxxxxxxx'
+sqlPassword = 'hua123456'
 
 module.exports = {
 	mailAddress,

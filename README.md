@@ -40,3 +40,9 @@ node install
 ```shell
 node app.js
 ```
+
+### 更新日志
+
+#### 2020-05-16
+
+优化 modules 下所有功能函数错误处理机制
